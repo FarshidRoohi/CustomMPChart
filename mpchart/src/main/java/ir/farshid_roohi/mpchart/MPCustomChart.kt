@@ -129,9 +129,12 @@ class MPCustomChart : LinearLayout {
         this.chartSecond.notifyDataSetChanged()
     }
 
-    fun setListDataSetFirst(list: ArrayList<Entry>) {
+    fun setListDataSetFirst(list: ArrayList<ir.farshid_roohi.mpchart.model.Entry>) {
         this.listDataSetFirst.clear()
-        this.listDataSetFirst.addAll(list)
+
+        list.forEach {
+            this.listDataSetFirst.add(Entry(it.x!!, it.y!!))
+        }
 
         if (this.dataOne!!.dataSets.isEmpty()) {
             this.dataOne!!.addDataSet(
@@ -147,10 +150,11 @@ class MPCustomChart : LinearLayout {
         this.chartOne.invalidate()
     }
 
-    fun setListDataSetSecond(listDataSetSecond: ArrayList<Entry>) {
+    fun setListDataSetSecond(list: ArrayList<ir.farshid_roohi.mpchart.model.Entry>) {
         this.listDataSetSecond.clear()
-        this.listDataSetSecond.addAll(listDataSetSecond)
-
+        list.forEach {
+            this.listDataSetSecond.add(Entry(it.x!!, it.y!!))
+        }
         if (this.dataSecond!!.dataSets.isEmpty()) {
             this.dataSecond!!.addDataSet(
                 createLineDataSet(
