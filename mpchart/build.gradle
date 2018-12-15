@@ -3,6 +3,14 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'com.android.library'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group = 'ir.farshid_roohi'
+version = '0.0.1'
+
+
 android {
     compileSdkVersion 28
 
@@ -23,6 +31,52 @@ android {
         }
     }
 
+}
+
+
+task generateSourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier 'sources'
+}
+
+task generateJavadocs(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath()
+            .join(File.pathSeparator))
+}
+
+task generateJavadocsJar(type: Jar) {
+    from generateJavadocs.destinationDir
+    classifier 'javadoc'
+}
+
+generateJavadocsJar.dependsOn generateJavadocs
+
+artifacts {
+    archives generateJavadocsJar
+    archives generateSourcesJar
+}
+bintray {
+    user = 'XXXX'
+    key = 'XXXX'
+    pkg {
+
+        repo = 'CustomMPChart'
+        name = 'CustomMPChart'
+        userOrg = ''
+
+        version {
+            name = '0.0.1'
+            desc = 'Custom MP Chart'
+            released = new Date()
+            vcsTag = '0.0.1'
+        }
+
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/FarshidRoohi/CustomMPChart'
+        websiteUrl = 'https://www.farshid-roohi.ir'
+    }
+    configurations = ['archives']
 }
 
 dependencies {
