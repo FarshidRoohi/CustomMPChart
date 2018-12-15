@@ -46,8 +46,7 @@ class MPCustomChart : LinearLayout {
     }
 
     private fun initialize() {
-        val view = LayoutInflater.from(context).inflate(R.layout.custom_chart, this, true)
-
+        LayoutInflater.from(context).inflate(R.layout.custom_chart, this, true)
 
         chartOne.xAxis.isEnabled = false
         chartOne.description.isEnabled = false
@@ -101,10 +100,6 @@ class MPCustomChart : LinearLayout {
         legendTwo.orientation = Legend.LegendOrientation.HORIZONTAL
         legendTwo.setDrawInside(false)
 
-    }
-
-    fun getTitle(): String {
-        return title
     }
 
     fun setTitle(title: String) {
