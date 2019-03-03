@@ -8,7 +8,7 @@ apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
 
 group = 'ir.farshid_roohi'
-version = '0.0.2'
+version = '0.0.6'
 
 
 android {
@@ -26,7 +26,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -36,8 +36,6 @@ android {
 
 
 }
-
-
 task generateSourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
     classifier 'sources'
@@ -61,8 +59,8 @@ artifacts {
     archives generateSourcesJar
 }
 bintray {
-    user = 'XXXX'
-    key = 'XXXX'
+    user = 'xxxx'
+    key = 'xxx'
     pkg {
 
         repo = 'CustomMPChart'
@@ -99,6 +97,6 @@ dependencies {
 tasks.withType(Javadoc).all {
     enabled = false
 }
-repositories {
-    mavenCentral()
-}
+//repositories {
+//    mavenCentral()
+//}
