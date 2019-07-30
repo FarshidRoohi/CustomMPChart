@@ -2,6 +2,7 @@ package ir.farshid_roohi.mpchart
 
 import android.content.Context
 import android.graphics.Color
+import android.graphics.Typeface
 import android.support.annotation.ColorInt
 import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
@@ -27,6 +28,9 @@ class MPCustomChart : LinearLayout {
     private var title = ""
     private var titleDataSetFirst = ""
     private var titleDataSetSecond = ""
+    private var typeface: Typeface? = null
+    private var legendOne: Legend? = null
+    private var legendTwo: Legend? = null
 
     private val listDataSetFirst = ArrayList<Entry>()
     private val listDataSetSecond = ArrayList<Entry>()
@@ -66,14 +70,14 @@ class MPCustomChart : LinearLayout {
         this.dataOne = LineData()
         this.chartOne.data = this.dataOne
 
-        val legend = this.chartOne.legend
-        legend.form = Legend.LegendForm.CIRCLE
-        legend.textSize = 12f
-        legend.textColor = Color.WHITE
-        legend.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
-        legend.horizontalAlignment = Legend.LegendHorizontalAlignment.LEFT
-        legend.orientation = Legend.LegendOrientation.HORIZONTAL
-        legend.setDrawInside(false)
+        legendOne = this.chartOne.legend
+        legendOne?.form = Legend.LegendForm.CIRCLE
+        legendOne?.textSize = 12f
+        legendOne?.textColor = Color.WHITE
+        legendOne?.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
+        legendOne?.horizontalAlignment = Legend.LegendHorizontalAlignment.LEFT
+        legendOne?.orientation = Legend.LegendOrientation.HORIZONTAL
+        legendOne?.setDrawInside(false)
 
         // config chart two
         this.chartSecond.xAxis.isEnabled = false
@@ -91,14 +95,14 @@ class MPCustomChart : LinearLayout {
         this.dataSecond = LineData()
         this.chartSecond.data = this.dataSecond
 
-        val legendTwo = this.chartSecond.legend
-        legendTwo.form = Legend.LegendForm.CIRCLE
-        legendTwo.textSize = 12f
-        legendTwo.textColor = Color.WHITE
-        legendTwo.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
-        legendTwo.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
-        legendTwo.orientation = Legend.LegendOrientation.HORIZONTAL
-        legendTwo.setDrawInside(false)
+        legendTwo = this.chartSecond.legend
+        legendTwo?.form = Legend.LegendForm.CIRCLE
+        legendTwo?.textSize = 12f
+        legendTwo?.textColor = Color.WHITE
+        legendTwo?.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
+        legendTwo?.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
+        legendTwo?.orientation = Legend.LegendOrientation.HORIZONTAL
+        legendTwo?.setDrawInside(false)
 
     }
 
@@ -177,5 +181,16 @@ class MPCustomChart : LinearLayout {
         lineDataSet.mode = LineDataSet.Mode.LINEAR
         lineDataSet.setDrawFilled(true)
         return lineDataSet
+    }
+
+    public fun setTypeface(typeface: Typeface) {
+        this.typeface = typeface
+
+        legendOne?.let {
+            it.typeface = typeface
+        }
+        legendTwo?.let {
+            it.typeface = typeface
+        }
     }
 }
