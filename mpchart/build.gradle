@@ -8,7 +8,7 @@ apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
 
 group = 'ir.farshid_roohi'
-version = '0.0.6'
+version = '0.0.7'
 
 
 android {
